@@ -99,35 +99,21 @@ class Main {
 
     private static String intToRoman(int number) {
         if (number <= 0) {
-            throw new IllegalArgumentException("Результат работы с римскими цифрами не может быть отрицательным или нулевым!");
+            throw new IllegalArgumentException("Результат выполнения операции с римскими цифрами не должен быть равным 0 или меньше");
         }
-        if (number >= 100) {
-            return repeat('C', number / 100) + intToRoman(number % 100);
-        } else if (number >= 90) {
-            return "XC" + intToRoman(number - 90);
-        } else if (number >= 50) {
-            return "L" + intToRoman(number - 50);
-        } else if (number >= 40) {
-            return "XL" + intToRoman(number - 40);
-        } else if (number >= 10) {
-            return repeat('X', number / 10) + intToRoman(number % 10);
-        } else if (number >= 9) {
-            return "IX" + intToRoman(number - 9);
-        } else if (number >= 5) {
-            return "V" + intToRoman(number - 5);
-        } else if (number >= 4) {
-            return "IV" + intToRoman(number - 4);
-        } else {
-            return repeat('I', number);
-        }
-    }
+        String[] romanNumerals = {"M", "CM", "D", "CD", "C", "XC", "L", "XL", "X", "IX", "V", "IV", "I"};
+        int[] arabicNumbers = {1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1};
 
-    private static String repeat(char c, int times) {
-        StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < times; i++) {
-            sb.append(c);
+        StringBuilder romanNumber = new StringBuilder();
+
+        for (int i = 0; i < arabicNumbers.length; i++) {
+            while (number >= arabicNumbers[i]) {
+                romanNumber.append(romanNumerals[i]);
+                number -= arabicNumbers[i];
+            }
         }
-        return sb.toString();
+
+        return romanNumber.toString();
     }
 }
 
