@@ -51,8 +51,9 @@ class Main {
         }
     }
 
-    private static boolean isRomanNumber(String number) {
-        return number.matches("[IVX]+");
+    public static boolean isRomanNumber(String number) {
+        String pattern = "^(I{1,3}|IV|V|VI|VII|VIII|IX|X+)$";
+        return number.matches(pattern);
     }
 
     private static int calculate(int num1, String operator, int num2) {
